@@ -18,9 +18,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.static(`${__dirname}/public`));
 
-// 
-// app.use("/", webRouter);
-// app.use("/api", apiRouter);
+app.use("/", webRouter);
+app.use("/api", apiRouter);
 
 
 app.listen(config.port, () => console.log(`Express started on port: ${config.port}`));
