@@ -1,0 +1,20 @@
+{
+  "name": "wdi-project-2",
+  "description": "This is my second project from my course at General Assembly",
+  "main": "index.js",
+  "authors": [
+    "Nattie87 <natalie.huitson@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Nattie87/wdi-project-2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.0"
+  }
+}

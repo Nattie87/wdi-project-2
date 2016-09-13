@@ -8,11 +8,11 @@ router.route("/register")
   router.route("/login")
   .post(authentications.login);
 
-router.route('/user')
-.get(user.index);
-router.route('/users/:id')
-.get(users.show)
-.put(users.update)
-.delete(users.delete);
+// router.route('/user')
+// .get(users.index);
+// router.route('/users/:id')
+// .get(users.show)
+// .put(users.update)
+// .delete(users.delete);
 
 module.exports = router;
