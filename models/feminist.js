@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const feministSchema = new mongoose.Schema({
   name:        { type: String, trim: true, required: true },
   image:       { type: String, trim: true, required: true },
-  date:        { type: String, trim: required: true}
+  date:        { type: String, trim: true, required: true},
   description: { type: String, trim: true },
   location:    { type: String, trim: true, required: true},
   lat:         { type: String, time: true, required: true },
@@ -12,4 +12,4 @@ const feministSchema = new mongoose.Schema({
   timestamps: true
 });
 
-module.exports = mongoose.model("Restaurant", restaurantSchema);
+module.exports = mongoose.model("Feminist", feministSchema);

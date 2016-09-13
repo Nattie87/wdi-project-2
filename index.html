@@ -1,14 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>My Feminist Map</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxM36DxD-TmmCuWMML0UXBVSirOUkF42Q" charset="utf-8"></script>
-    <script type="text/javascript" src="/js/app.js"></script>
-  </head>
-  <body>
-    <h1>Suffragettes</h1>
-    <div id="map-canvas"></div>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <title>My Feminist Map</title>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqxPQAnLH1aeKzqUUb3dX60rVehJ3RXvQ" charset="utf-8"></script>
+  <script type="text/javascript" src="/js/app.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar navbar-light bg-faded">
+    <div class="container">
+      <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation">
+        &#9776;
+      </button>
+      <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
+        <a class="navbar-brand" href="#">Girl Power!</a>
+        <ul class="nav navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link home loggedIn" href="#">Map<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link login loggedOut" href="#">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link register loggedOut" href="#">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link logout loggedIn" href="#">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <h1>My Feminist Map</h1>
+  <main class="container"></main>
+  <div class="panel-footer"> © Suffrage is a pivotal right </div>
+</body>
 </html>
