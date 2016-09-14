@@ -16,6 +16,7 @@ App.eventListeners = function() {
   $(".login").on("click", this.login.bind(this));
   $(".logout").on("click", this.logout.bind(this));
   $(".home").on("click", this.mapSetup.bind(this));
+  $('.dropdown-menu .dropdown-item').on('click', this.changeMapLocation);
   this.$main.on("submit", "form", this.handleForm);
   // this.$main.on('submit', 'form', this.addFeminist);
 
@@ -26,26 +27,40 @@ App.eventListeners = function() {
   }
 };
 
+App.changeMapLocation = function() {
+  let id = $(this).attr('id').split(',');
+
+  let latlng = new
+  google.maps.LatLng(id[0],  id[1]);
+
+  App.map.setCenter(latlng);
+};
+
 App.toggleForm = function() {
   $('form').slideToggle();
 };
 
 App.getCurrentLocation = function() {
   navigator.geolocation.getCurrentPosition( function (position) {
+    let icon = {
+               url:("./images/suffragette.png"), // url
+               scaledSize: new google.maps.Size(50, 50), // scaled size
+               origin:     new google.maps.Point(0,0), // origin
+               anchor:     new google.maps.Point(0, 0) // anchor
+             };
     let marker = new google.maps.Maker({
       position: new
       google.maps.LatLng(position.coords.latitude, position.coords.longitude),
       map: App.map,
-      animation: google.maps.Animation.Drop,
-      icon: {
-        url: "http://furtaev.ru/preview/user_on_map_2_small.png",
-        scaledSize: new
-        google.maps.Size(56, 56)
+      animation: google.maps.Animation.DROP,
+      icon,
+        scaledSize: new google.maps.Size(56, 56)
       }
-    });
-    App.map.setCenter(marker.getPosition());
+    );
+    googleMap.map.setCenter(marker.getPosition());
   });
 };
+
 
 App.addFeminist = function() {
   event.preventDefault();
@@ -66,7 +81,7 @@ App.mapSetup = function() {
   let mapOptions = {
     zoom: 13,
     center: new google.maps.LatLng(51.506178, -0.088369),
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    styles: [{"featureType":"all","elementType":"all","stylers":[{"color":"#d4b78f"},{"visibility":"on"}]},{"featureType":"all","elementType":"geometry.stroke","stylers":[{"color":"#0d0000"},{"visibility":"on"},{"weight":1}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#98290e"},{"visibility":"on"}]},{"featureType":"administrative","elementType":"labels.text.stroke","stylers":[{"visibility":"off"}]},{"featureType":"administrative.province","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"administrative.locality","elementType":"labels.text.fill","stylers":[{"color":"#98290e"},{"visibility":"on"}]},{"featureType":"administrative.locality","elementType":"labels.text.stroke","stylers":[{"visibility":"off"}]},{"featureType":"administrative.neighborhood","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#d4b78f"},{"visibility":"on"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"all","stylers":[{"color":"#c4b17e"},{"visibility":"on"}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"labels.text.fill","stylers":[{"color":"#0d0000"},{"visibility":"on"}]},{"featureType":"road.highway","elementType":"labels.text.stroke","stylers":[{"color":"#d9be94"},{"visibility":"on"}]},{"featureType":"road.highway.controlled_access","elementType":"geometry.fill","stylers":[{"color":"#0d0000"},{"visibility":"off"},{"weight":2}]},{"featureType":"road.arterial","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#a8ac91"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"color":"#98290e"},{"visibility":"on"}]},{"featureType":"water","elementType":"labels.text.stroke","stylers":[{"visibility":"off"}]}]
   };
   this.map = new google.maps.Map(canvas, mapOptions);
   this.getFeminists();
