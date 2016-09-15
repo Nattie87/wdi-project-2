@@ -1,32 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+  <meta charset="utf-8">
   <title>My Suffragette Map</title>
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqxPQAnLH1aeKzqUUb3dX60rVehJ3RXvQ" charset="utf-8"></script>
-  <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet"> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Trocchi" rel="stylesheet">
 
   <script type="text/javascript" src="/js/app.js"></script>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <nav class="navbar navbar-light bg-faded">
-    <div class="container">
-      <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation">
-        &#9776;
-      </button>
-      <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
-        <!-- <a class="navbar-brand" href="#">WSPU</a> -->
-        <ul class="nav navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link home loggedIn" href="#">Map<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link Home" href="#">Home<span class="sr-only">(current)</span></a>
-            <li class="nav-item active">
+  <header>
+    <h1><img src="/images/pin-large.png" alt="Suffragette Pin">My Suffragette Map</h1>
+    <div>
+      <a href="https://twitter.com/SuffragetteFilm" target="_blank">
+        <img title="Twitter" alt="Twitter" src="https://socialmediawidgets.files.wordpress.com/2014/03/01_twitter.png" width="35" height="35" />
+      </a>
+      <a href="https://uk.pinterest.com/hermes2012/suffragettes/" target="_blank">
+        <img title="Pinterest" alt="Pinterest" src="https://socialmediawidgets.files.wordpress.com/2014/03/13_pinterest.png" width="35" height="35" />
+      </a>
+      <a href="https://www.facebook.com/SuffragetteMovie" target="_blank">
+        <img title="Facebook" alt="Facebook" src="https://socialmediawidgets.files.wordpress.com/2014/03/02_facebook.png" width="35" height="35" />
+      </a>
+      <a href="https://www.instagram.com/explore/tags/suffragette/" target="_blank">
+        <img title="Instagram" alt="RSS" src="https://socialmediawidgets.files.wordpress.com/2014/03/10_instagram.png" width="35" height="35" />
+      </a>
+    </div>
+    <nav class="navbar navbar-light bg-faded">
+      <div class="container">
+        <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation">
+          &#9776;
+        </button>
+        <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
+          <ul class="nav navbar-nav">
+            <li class="nav-item">
+              <a class="home" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="map loggedIn" href="#">Map</a>
+            </li>
+            <li class="nav-item loggedIn">
               <div class="dropdown">
-                <a class="btn btn-secondary dropdown-toggle" href="http://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Location
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -50,9 +67,12 @@
         </div>
       </div>
     </nav>
-    <h1>My Suffragette Map</h1>
-    <main class="container"></main>
-    <div class="panel-footer"> © Suffrage is a pivotal right
+  </header>
+  <main></main>
+  <nav id="footer-nav" class="navbar navbar-fixed-bottom">
+    © Suffrage is a pivotal right <div>
+
     </div>
-  </body>
-  </html>
+  </nav>
+</body>
+</html>

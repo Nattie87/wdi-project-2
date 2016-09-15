@@ -4,7 +4,7 @@ App.api_url = "http://localhost:3000/api";
 
 App.init = function() {
   this.eventListeners();
-  this.mapSetup();
+    this.homepage();
 };
 
 App.eventListeners = function() {
@@ -15,10 +15,10 @@ App.eventListeners = function() {
   $(".register").on("click", this.register.bind(this));
   $(".login").on("click", this.login.bind(this));
   $(".logout").on("click", this.logout.bind(this));
-  $(".home").on("click", this.mapSetup.bind(this));
+  $(".home").on("click", this.homepage.bind(this));
+  $(".map").on("click", this.mapSetup.bind(this));
   $('.dropdown-menu .dropdown-item').on('click', this.changeMapLocation);
   this.$main.on("submit", "form", this.handleForm);
-  // this.$main.on('submit', 'form', this.addFeminist);
 
   if (this.getToken()) {
     this.loggedInState();
@@ -27,7 +27,25 @@ App.eventListeners = function() {
   }
 };
 
+App.homepage = function () {
+$("header h1").hide();
+  this.$main.html(`
+    <div class="centered">
+    <h1><img src="/images/pin-large.png" alt="Suffragette Pin">The Suffragette Map</h1>
+    <h3>Freedom or death</h3>
+    <a href="http://thenewcode.com/777/Create-Fullscreen-HTML5-Page-Background-Video"></a>
+    <p>"We women, in trying to make our case clear, always have to make as part of our argument, and urge upon men in our audience the fact - a very simple fact - that women are human beings."
+
+    "We were called militant, and we were quite willing to accept the name. We were determined to press this question of the enfranchisement of women to the point where we were no longer to be ignored by the politicians."
+
+    "We wear no mark; we belong to every class; we permeate every class of the community from the highest to the lowest; and so you see in the woman's civil war the dear men of my country are discovering it is absolutely impossible to deal with it: you cannot locate it, and you cannot stop it."
+
+    "As long as women consent to be unjustly governed, they can be, but directly women say: "We withhold our consent, we will not be governed any longer so long as that government is unjust."</p>
+    </div>
+    `);
+};
 App.changeMapLocation = function() {
+  App.mapSetup();
   let id = $(this).attr('id').split(',');
 
   let latlng = new
@@ -42,22 +60,25 @@ App.toggleForm = function() {
 
 App.getCurrentLocation = function() {
   navigator.geolocation.getCurrentPosition( function (position) {
-    let icon = {
-               url:("./images/suffragette.png"), // url
-               scaledSize: new google.maps.Size(50, 50), // scaled size
-               origin:     new google.maps.Point(0,0), // origin
-               anchor:     new google.maps.Point(0, 0) // anchor
-             };
-    let marker = new google.maps.Maker({
-      position: new
-      google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+    App.currentLocation = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    };
+
+    var icon = {
+      url: "images/pin-large.png", // url
+      scaledSize: new google.maps.Size(40, 65), // scaled size
+      origin: new google.maps.Point(0,0), // origin
+      anchor: new google.maps.Point(0, 0) // anchor
+    };
+
+    let marker = new google.maps.Marker({
+      position: App.currentLocation,
       map: App.map,
       animation: google.maps.Animation.DROP,
-      icon,
-        scaledSize: new google.maps.Size(56, 56)
-      }
-    );
-    googleMap.map.setCenter(marker.getPosition());
+      icon
+    });
+    App.map.panTo(App.currentLocation);
   });
 };
 
@@ -76,12 +97,13 @@ App.addFeminist = function() {
 };
 
 App.mapSetup = function() {
+  $("header h1").show();
   $("main").html("<div id='map'></div>");
   let canvas = document.getElementById('map');
   let mapOptions = {
     zoom: 13,
     center: new google.maps.LatLng(51.506178, -0.088369),
-    styles: [{"featureType":"all","elementType":"all","stylers":[{"color":"#d4b78f"},{"visibility":"on"}]},{"featureType":"all","elementType":"geometry.stroke","stylers":[{"color":"#0d0000"},{"visibility":"on"},{"weight":1}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#98290e"},{"visibility":"on"}]},{"featureType":"administrative","elementType":"labels.text.stroke","stylers":[{"visibility":"off"}]},{"featureType":"administrative.province","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"administrative.locality","elementType":"labels.text.fill","stylers":[{"color":"#98290e"},{"visibility":"on"}]},{"featureType":"administrative.locality","elementType":"labels.text.stroke","stylers":[{"visibility":"off"}]},{"featureType":"administrative.neighborhood","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#d4b78f"},{"visibility":"on"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"all","stylers":[{"color":"#c4b17e"},{"visibility":"on"}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"labels.text.fill","stylers":[{"color":"#0d0000"},{"visibility":"on"}]},{"featureType":"road.highway","elementType":"labels.text.stroke","stylers":[{"color":"#d9be94"},{"visibility":"on"}]},{"featureType":"road.highway.controlled_access","elementType":"geometry.fill","stylers":[{"color":"#0d0000"},{"visibility":"off"},{"weight":2}]},{"featureType":"road.arterial","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#a8ac91"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"color":"#98290e"},{"visibility":"on"}]},{"featureType":"water","elementType":"labels.text.stroke","stylers":[{"visibility":"off"}]}]
+    styles: [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#e9e9e9"},{"lightness":17}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#e2d8b5"},{"lightness":0}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#be3075"},{"lightness":16}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#e2d8b5"},{"lightness":21}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#e2d8b5"},{"lightness":21}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"lightness":16}]},{"elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#be3075"},{"lightness":40}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#e2d8b5"},{"lightness":-10}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#e2d8b5"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#e2d8b5"},{"lightness":17},{"weight":1.2}]}]
   };
   this.map = new google.maps.Map(canvas, mapOptions);
   this.getFeminists();
@@ -99,15 +121,20 @@ App.createMarkerForFeminist = function(index, feminist) {
   let latlng = new
   google.maps.LatLng(feminist.lat, feminist.lng);
 
+  var icon = {
+    url: "/images/pin-large.png", // url
+    scaledSize: new google.maps.Size(40, 65), // scaled size
+    origin: new google.maps.Point(0,0), // origin
+    anchor: new google.maps.Point(0, 0) // anchor
+  };
+
   let marker = new
   google.maps.Marker({
     position: latlng,
     map: this.map,
-    icon: {
-      url: "https://pixabay.com/static/uploads/photo/2015/12/14/20/29/tracker-1093167_960_720.png",
-      scaledSize: new
-      google.maps.Size(56,56)
-    }
+    animation: google.maps.Animation.DROP,
+    icon
+
   });
   this.addInfoWindowForFeminist(feminist, marker);
 };
@@ -119,7 +146,7 @@ App.addInfoWindowForFeminist = function(feminist, marker) {
     this.infowindow = new google.maps.InfoWindow({
       content: `
       <div class="infowindow">
-      <img src="${ feminist.image}">
+      <img class="suffragetteImage"src="${ feminist.image}">
       <h3>${feminist.name }</h3>
       <p>${ feminist.date}</p>
       <p>${ feminist.location}</p>
@@ -142,47 +169,51 @@ App.loggedInState = function(){
 App.loggedOutState = function() {
   $(".loggedOut").show();
   $(".loggedIn").hide();
-  this.register();
+  this.homepage();
 };
 
 App.register = function() {
   if (event) event.preventDefault();
   this.$main.html( `
-    <h2>Register</h2>
-    <form method="post" action="/register">
-    <div class="form-group">
-      <input class="form-control" type="text" name="user[username]" placeholder="Username">
-    </div>
-    <div class="form-group">
-      <input class="form-control" type="email" name="user[email]" placeholder="Email">
-    </div>
-    <div class="form-group">
-      <input class="form-control" type="password" name="user[password]" placeholder="Password">
-    </div>
-    <div class="form-group">
-      <input class="form-control" type="password" name="user[passwordConfirmation]" placeholder="Password Confirmation">
-    </div>
-    <input class="btn btn-primary" type="submit" value="Register">
-    </form>
+    <section class="container">
+      <h2>Register</h2>
+      <form method="post" action="/register">
+      <div class="form-group">
+        <input class="form-control" type="text" name="user[username]" placeholder="Username">
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="email" name="user[email]" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="password" name="user[password]" placeholder="Password">
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="password" name="user[passwordConfirmation]" placeholder="Password Confirmation">
+      </div>
+      <input class="btn btn-primary" type="submit" value="Register">
+      </form>
+    </section>
   `);
 };
 
 App.login = function() {
   event.preventDefault();
   this.$main.html(`
-    <h2>Login</h2>
-    <form method="post" action="/login">
-    <div class="form-group">
-    <input class="form-control" type="email"
-    name="email" placeholder="Email">
-    </div>
-    <div class="form-group">
-    <input class="form-control" type="password"
-    name="password" placeholder="Password">
-    </div>
-    <input class="btn btn-primary" type="submit"
-    value="Login">
-    </form>
+    <section class="container">
+      <h2>Login</h2>
+      <form method="post" action="/login">
+      <div class="form-group">
+      <input class="form-control" type="email"
+      name="email" placeholder="Email">
+      </div>
+      <div class="form-group">
+      <input class="form-control" type="password"
+      name="password" placeholder="Password">
+      </div>
+      <input class="btn btn-primary" type="submit"
+      value="Login">
+      </form>
+    </section>
   `);
 };
 
