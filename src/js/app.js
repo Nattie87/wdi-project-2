@@ -42,6 +42,7 @@ $("header h1").hide();
 
     "As long as women consent to be unjustly governed, they can be, but directly women say: "We withhold our consent, we will not be governed any longer so long as that government is unjust."</p>
     </div>
+
     `);
 };
 App.changeMapLocation = function() {
