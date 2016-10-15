@@ -1,2 +1,7 @@
 # wdi-project-2
-This is my second project from my course at General Assembly
+
+My Suffragette Map
+This project was an historical api Express app. A user can register, login and click on different historical Suffragette locations. Once on the location you will see a pop up pin with a picture and historical fact about that specific pin. 
+
+The main packages I used were Babel, Cors, Body-Parser, Bcrypt and Gulp. 
+
