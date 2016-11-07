@@ -1,9 +1,7 @@
 # wdi-project-2
 
 
-![alt text](http://imgur.com/do1EV8H.png (437KB)
-
-"Date Mate London Homepage")
+![alt text](http://imgur.com/hLJPEQj.png (437KB)"My Suffragette Map")
 
 
 My Suffragette Map
