@@ -1,24 +1,24 @@
 const App = App || {};
 
-App.api_url = "http://localhost:3000/api";
+App.api_url = 'http://localhost:3000/api';
 
 App.init = function() {
   this.eventListeners();
-    this.homepage();
+  this.homepage();
 };
 
 App.eventListeners = function() {
-  this.$main  = $("main");
+  this.$main  = $('main');
 
   $('.location').on('click', this.getCurrentLocation);
   $('.new').on('click', this.toggleForm);
-  $(".register").on("click", this.register.bind(this));
-  $(".login").on("click", this.login.bind(this));
-  $(".logout").on("click", this.logout.bind(this));
-  $(".home").on("click", this.homepage.bind(this));
-  $(".map").on("click", this.mapSetup.bind(this));
+  $('.register').on('click', this.register.bind(this));
+  $('.login').on('click', this.login.bind(this));
+  $('.logout').on('click', this.logout.bind(this));
+  $('.home').on('click', this.homepage.bind(this));
+  $('.map').on('click', this.mapSetup.bind(this));
   $('.dropdown-menu .dropdown-item').on('click', this.changeMapLocation);
-  this.$main.on("submit", "form", this.handleForm);
+  this.$main.on('submit', 'form', this.handleForm);
 
   if (this.getToken()) {
     this.loggedInState();
@@ -28,7 +28,7 @@ App.eventListeners = function() {
 };
 
 App.homepage = function () {
-$("header h1").hide();
+  $('header h1').hide();
   this.$main.html(`
     <div class="centered">
     <h1><img src="/images/pin-large.png" alt="Suffragette Pin">The Suffragette Map</h1>
@@ -47,9 +47,9 @@ $("header h1").hide();
 };
 App.changeMapLocation = function() {
   App.mapSetup();
-  let id = $(this).attr('id').split(',');
+  const id = $(this).attr('id').split(',');
 
-  let latlng = new
+  const latlng = new
   google.maps.LatLng(id[0],  id[1]);
 
   App.map.setCenter(latlng);
@@ -67,13 +67,13 @@ App.getCurrentLocation = function() {
     };
 
     var icon = {
-      url: "images/pin-large.png", // url
+      url: 'images/pin-large.png', // url
       scaledSize: new google.maps.Size(40, 65), // scaled size
       origin: new google.maps.Point(0,0), // origin
       anchor: new google.maps.Point(0, 0) // anchor
     };
 
-    let marker = new google.maps.Marker({
+    const marker = new google.maps.Marker({
       position: App.currentLocation,
       map: App.map,
       animation: google.maps.Animation.DROP,
@@ -87,8 +87,8 @@ App.getCurrentLocation = function() {
 App.addFeminist = function() {
   event.preventDefault();
   $.ajax({
-    method: "POST",
-    url: "http://localhost:3000/api/feminists",
+    method: 'POST',
+    url: 'http://localhost:3000/api/feminists',
     data: $(this).serialize()
   }).done(data => {
     console.log(data.feminist);
@@ -98,13 +98,13 @@ App.addFeminist = function() {
 };
 
 App.mapSetup = function() {
-  $("header h1").show();
-  $("main").html("<div id='map'></div>");
-  let canvas = document.getElementById('map');
-  let mapOptions = {
+  $('header h1').show();
+  $('main').html('<div id=\'map\'></div>');
+  const canvas = document.getElementById('map');
+  const mapOptions = {
     zoom: 13,
     center: new google.maps.LatLng(51.506178, -0.088369),
-    styles: [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#e9e9e9"},{"lightness":17}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#e2d8b5"},{"lightness":0}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#be3075"},{"lightness":16}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#e2d8b5"},{"lightness":21}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#e2d8b5"},{"lightness":21}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"lightness":16}]},{"elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#be3075"},{"lightness":40}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#e2d8b5"},{"lightness":-10}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#e2d8b5"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#e2d8b5"},{"lightness":17},{"weight":1.2}]}]
+    styles: [{'featureType': 'water','elementType': 'geometry','stylers': [{'color': '#e9e9e9'},{'lightness': 17}]},{'featureType': 'landscape','elementType': 'geometry','stylers': [{'color': '#e2d8b5'},{'lightness': 0}]},{'featureType': 'road.highway','elementType': 'geometry.fill','stylers': [{'color': '#ffffff'},{'lightness': 17}]},{'featureType': 'road.highway','elementType': 'geometry.stroke','stylers': [{'color': '#ffffff'},{'lightness': 29},{'weight': 0.2}]},{'featureType': 'road.arterial','elementType': 'geometry','stylers': [{'color': '#ffffff'},{'lightness': 18}]},{'featureType': 'road.local','elementType': 'geometry','stylers': [{'color': '#be3075'},{'lightness': 16}]},{'featureType': 'poi','elementType': 'geometry','stylers': [{'color': '#e2d8b5'},{'lightness': 21}]},{'featureType': 'poi.park','elementType': 'geometry','stylers': [{'color': '#e2d8b5'},{'lightness': 21}]},{'elementType': 'labels.text.stroke','stylers': [{'visibility': 'on'},{'color': '#ffffff'},{'lightness': 16}]},{'elementType': 'labels.text.fill','stylers': [{'saturation': 36},{'color': '#be3075'},{'lightness': 40}]},{'elementType': 'labels.icon','stylers': [{'visibility': 'off'}]},{'featureType': 'transit','elementType': 'geometry','stylers': [{'color': '#e2d8b5'},{'lightness': -10}]},{'featureType': 'administrative','elementType': 'geometry.fill','stylers': [{'color': '#e2d8b5'},{'lightness': 20}]},{'featureType': 'administrative','elementType': 'geometry.stroke','stylers': [{'color': '#e2d8b5'},{'lightness': 17},{'weight': 1.2}]}]
   };
   this.map = new google.maps.Map(canvas, mapOptions);
   this.getFeminists();
@@ -119,17 +119,17 @@ App.loopThroughFeminists = function(data) {
 };
 
 App.createMarkerForFeminist = function(index, feminist) {
-  let latlng = new
+  const latlng = new
   google.maps.LatLng(feminist.lat, feminist.lng);
 
   var icon = {
-    url: "/images/pin-large.png", // url
+    url: '/images/pin-large.png', // url
     scaledSize: new google.maps.Size(40, 65), // scaled size
     origin: new google.maps.Point(0,0), // origin
     anchor: new google.maps.Point(0, 0) // anchor
   };
 
-  let marker = new
+  const marker = new
   google.maps.Marker({
     position: latlng,
     map: this.map,
@@ -142,8 +142,8 @@ App.createMarkerForFeminist = function(index, feminist) {
 
 App.addInfoWindowForFeminist = function(feminist, marker) {
   google.maps.event.addListener(marker, 'click', () => {
-    if (typeof this.infowindow != "undefined")
-    this.infowindow.close();
+    if (typeof this.infowindow !== 'undefined')
+      this.infowindow.close();
     this.infowindow = new google.maps.InfoWindow({
       content: `
       <div class="infowindow">
@@ -162,14 +162,14 @@ App.addInfoWindowForFeminist = function(feminist, marker) {
 };
 
 App.loggedInState = function(){
-  $(".loggedOut").hide();
-  $(".loggedIn").show();
+  $('.loggedOut').hide();
+  $('.loggedIn').show();
   this.mapSetup();
 };
 
 App.loggedOutState = function() {
-  $(".loggedOut").show();
-  $(".loggedIn").hide();
+  $('.loggedOut').show();
+  $('.loggedIn').hide();
   this.homepage();
 };
 
@@ -227,9 +227,9 @@ App.logout = function(){
 App.handleForm = function(){
   event.preventDefault();
 
-  let url = `${App.api_url}${$(this).attr("action")}`;
-  let method = $(this).attr("method");
-  let data = $(this).serialize();
+  const url = `${App.api_url}${$(this).attr('action')}`;
+  const method = $(this).attr('method');
+  const data = $(this).serialize();
 
   return App.ajaxRequest(url, method, data, (data) => {
     if (data.token) App.setToken(data.token);
@@ -251,15 +251,15 @@ App.ajaxRequest = function(url, method, data, callback){
 };
 
 App.setRequestHeader = function(xhr, settings) {
-  return xhr.setRequestHeader("Authorization", `Bearer ${this.getToken()}`);
+  return xhr.setRequestHeader('Authorization', `Bearer ${this.getToken()}`);
 };
 
 App.setToken = function(token){
-  return window.localStorage.setItem("token", token);
+  return window.localStorage.setItem('token', token);
 };
 
 App.getToken = function(){
-  return window.localStorage.getItem("token");
+  return window.localStorage.getItem('token');
 };
 
 App.removeToken = function(){

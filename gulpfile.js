@@ -1,12 +1,12 @@
-const gulp     	       = require("gulp");                     // => use gulp
-const babel    	       = require("gulp-babel");               // => es6 to es6 conversion
-const cleanCSS 	       = require("gulp-clean-css");           // => minify css
+const gulp     	       = require('gulp');                     // => use gulp
+const babel    	       = require('gulp-babel');               // => es6 to es6 conversion
+const cleanCSS 	       = require('gulp-clean-css');           // => minify css
 const stripCssComments = require('gulp-strip-css-comments');  // => strip comments from css
-const sass 	   	       = require("gulp-sass");                // => write scss and convert to css
-const autoprefixer     = require("gulp-autoprefixer");        // => add web prefixes to CSS
-const uglify           = require("gulp-uglify");              // => uglify js
-const livereload       = require("gulp-livereload");          // => no browser refresh on changes
-const nodemon          = require("gulp-nodemon");             // => run nodemon
+const sass 	   	       = require('gulp-sass');                // => write scss and convert to css
+const autoprefixer     = require('gulp-autoprefixer');        // => add web prefixes to CSS
+const uglify           = require('gulp-uglify');              // => uglify js
+const livereload       = require('gulp-livereload');          // => no browser refresh on changes
+const nodemon          = require('gulp-nodemon');             // => run nodemon
 const filter           = require('gulp-filter');              // => selects files of a certain type
 const flatten          = require('gulp-flatten');             // => brings all files into one directory
 const concat           = require('gulp-concat');              // => compress multiple files into one
@@ -18,27 +18,27 @@ const del              = require('del');                      // => delete files
 const replace          = require('gulp-replace');
 const strip            = require('gulp-strip-comments');
 const bower            = mainBowerFiles({
-  "overrides": {
-    "bootstrap": {
-      "main": [
-        "dist/css/bootstrap.css",
-        "dist/js/bootstrap.js",
+  'overrides': {
+    'bootstrap': {
+      'main': [
+        'dist/css/bootstrap.css',
+        'dist/js/bootstrap.js'
       ]
     },
-    "font-awesome": {
-      "main": "css/font-awesome.css"
+    'font-awesome': {
+      'main': 'css/font-awesome.css'
     }
   }
 });
 
-const src  = "src";
-const dist = "public";
+const src  = 'src';
+const dist = 'public';
 
 // bower
 gulp.task('bower', [
   'bower:js',
   'bower:css',
-  'bower:fonts',
+  'bower:fonts'
 ]);
 
 gulp.task('bower:js', () => gulp.src(bower)
@@ -74,11 +74,11 @@ gulp.task('nodemon', () => {
 
 // sass
 gulp.task('sass', () => {
-	return gulp.src(`${src}/scss/style.scss`)
+  return gulp.src(`${src}/scss/style.scss`)
     .pipe(cache('sass'))
     .pipe(sass(sass()).on('error', sass.logError))
     .pipe(stripCssComments())
-    .pipe(cleanCSS({ compatibility: "ie8"}))
+    .pipe(cleanCSS({ compatibility: 'ie8'}))
     .pipe(flatten())
     .pipe(autoprefixer())
     .pipe(gulp.dest(`${dist}/css`))
@@ -86,19 +86,19 @@ gulp.task('sass', () => {
 });
 
 // scripts & es6
-gulp.task("scripts", () => {
+gulp.task('scripts', () => {
   return gulp.src(`${src}/**/*.js`)
 		.pipe(babel({
-			presets: ["es2015"],
-      compact: true,
-      ignore: [
-        '_bower.js',
-      ]
-		}))
+  presets: ['es2015'],
+  compact: true,
+  ignore: [
+    '_bower.js'
+  ]
+}))
     .pipe(flatten())
     .pipe(order([
-      "_bower.js",
-      "**/*.js"
+      '_bower.js',
+      '**/*.js'
     ]))
     .pipe(concat('app.js'))
     .pipe(uglify())
@@ -113,12 +113,12 @@ gulp.task('copy', [
 ]);
 
 // copy fonts from src to dist
-gulp.task("copy:fonts", () => {
+gulp.task('copy:fonts', () => {
   return gulp.src(`${src}/**/*.{eot,svg,ttf,woff,woff2}`)
     .pipe(gulp.dest(dist));
 });
 // copy images  from src to dist
-gulp.task("copy:images", () => {
+gulp.task('copy:images', () => {
   return gulp.src(`${src}/**/*.{png,gif,jpg,ico}`)
     .pipe(gulp.dest(dist));
 });
@@ -126,7 +126,7 @@ gulp.task("copy:images", () => {
 // clean public
 gulp.task('clean:public', () => {
   return del([
-    'public/**/*',
+    'public/**/*'
   ]);
 });
 
@@ -136,14 +136,14 @@ gulp.task('html', () => {
 });
 
 // watch changes
-gulp.task("watch", () => {
+gulp.task('watch', () => {
 	  livereload.listen();
-    gulp.watch('./index.html', ['html']);
-    gulp.watch(`${src}/**/*.js`, ['bower', 'scripts']);
+  gulp.watch('./index.html', ['html']);
+  gulp.watch(`${src}/**/*.js`, ['bower', 'scripts']);
 	  gulp.watch(`${src}/**/*.scss`, ['sass']);
 });
 
-gulp.task("default", [
+gulp.task('default', [
   'clean:public',
   'bower',
   'sass',

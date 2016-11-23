@@ -1,10 +1,10 @@
-const express = require("express");
+const express = require('express');
 const router  = express.Router();
-const path    = require("path");
+const path    = require('path');
 
-const statics = require("../controllers/statics");
+const statics = require('../controllers/statics');
 
-router.route("/")
-.get (statics.home);
+router.route('/')
+.get(statics.home);
 
 module.exports = router;
