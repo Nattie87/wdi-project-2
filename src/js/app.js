@@ -1,6 +1,6 @@
 const App = App || {};
 
-App.api_url = 'http://localhost:3000/api';
+App.api_url = 'https://infinite-waters-70510.herokuapp.com/api';
 
 App.init = function() {
   this.eventListeners();
@@ -88,7 +88,7 @@ App.addFeminist = function() {
   event.preventDefault();
   $.ajax({
     method: 'POST',
-    url: 'http://localhost:3000/api/feminists',
+    url: 'https://infinite-waters-70510.herokuapp.com/api/feminists',
     data: $(this).serialize()
   }).done(data => {
     console.log(data.feminist);
