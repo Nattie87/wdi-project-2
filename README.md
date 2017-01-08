@@ -12,13 +12,17 @@ Here is a picture of my map without the pins
 
 <img width="1280" alt="screen shot 2016-09-19 at 18 03 57" src="https://cloud.githubusercontent.com/assets/18580595/18641265/cb1609f2-7e93-11e6-85b5-543262bbc2eb.png">
 
------------------------Decisions ----------------
+---------
+Decisions
+---------
+
 I dedicated 2 days of my project at the very beginning to collate an excel sheet consisting of historical facts. Whilst collating this excel sheet, i had to pin point lat and lang locations of these historical moments to pop on my map. 
 
 I stretched these pin points not only to London but to Manchester and Epsom also. I always wanted an historical map for this project as apose to a live map with live updated data. My original idea was a map of murders however, the subject of the Suffragettes appealed to me more and I knew that I would be passionate about this subject for the full week.
 
------------------------Issues --------------------------------
-
+---------
+Issues
+---------
 One of the main issues during this project was getting the styling right. Although the coding itself was still very tricky, through previous examples and personal notes I understood the concepts and I totally understood with some time how to implement them into my project. I felt so much more confident with the structure of my code than my first project at General Assembly and I took on board errors that I came across as apose to just freaking out.
 
 Sorting out how to pop in the different locations through a drop down was also a stuggle on this project. I had to have a form where the user has a drop down with the 4 locations around the country.
@@ -27,15 +31,17 @@ Sorting out how to pop in the different locations through a drop down was also a
 
 Steps & Building
 
----------------------------Steps ----------------------------
-
+---------
+Steps
+---------
 1. Collate the information for my seed file (using internet, books, articles etc)
 2. Sorting out my schema
 3. Sorting out the authenticiation of my app. Login, Password, Register
 4. Sorting out my forms and getting the actual googlemaps onto my app itself.
 
-----------------------------Build ---------------------------
-
+---------
+Build
+---------
 Packages: 
 ```gulp
 babel
