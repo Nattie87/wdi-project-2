@@ -5,8 +5,6 @@ This is my second project from my course at General Assembly
 Design Decisions & Issues
 -------------------------
 
-------------------------Design -------------------------
-
 The original idea of my app was a dedication as it were to the Suffragettes. I wanted to have the design of the app to be simple, classy and none fussy. Because the history of the Suffragettes was so profound, I wanted my app to not be swollowed up by fussy colours and added extras. Originally I wanted my colours to be the straight suffragette colours of purple, green and white however, in the end product I decided to calm this down to just hold tiny aspects of these colours around the app without it being so bold.
 ere is a picture of my map without the pins
 
